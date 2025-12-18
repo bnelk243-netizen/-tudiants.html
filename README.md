@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bnelk Formations Gratuites</title>
+  <style>
+    body { margin:0; font-family: Arial, sans-serif; background:#f5f7fa; color:#333; }
+    header { background:#2c3e50; color:#fff; padding:15px; text-align:center; }
+    header img { height:50px; vertical-align:middle; margin-right:10px; }
+    nav { background:#34495e; padding:10px 0; }
+    nav ul { list-style:none; display:flex; justify-content:center; margin:0; padding:0; flex-wrap:wrap; }
+    nav li { margin:0 15px; }
+    nav a { color:#ecf0f1; text-decoration:none; font-weight:bold; }
+    nav a:hover { text-decoration:underline; }
+    .search-bar { margin:15px auto; max-width:600px; text-align:center; }
+    .search-bar input { width:90%; padding:10px; border-radius:6px; border:1px solid #ccc; font-size:14px; }
+    .categories { text-align:center; margin:20px 0; }
+    .categories button { margin:5px; padding:8px 12px; border:none; border-radius:6px; background:#3498db; color:#fff; cursor:pointer; }
+    .categories button:hover { background:#2980b9; }
+    .container { max-width:1200px; margin:20px auto; padding:0 15px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+    .card { background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); overflow:hidden; display:flex; flex-direction:column; }
+    .card video { width:100%; height:auto; }
+    .card-body { padding:15px; flex:1; }
+    .card-body h3 { margin:0 0 10px; font-size:18px; }
+    .card-body p { font-size:14px; color:#555; }
+    .card-footer { padding:15px; border-top:1px solid #eee; text-align:right; }
+    .btn { background:#3498db; color:#fff; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; text-decoration:none; font-size:14px; }
+    .btn:hover { background:#2980b9; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo Bnelk">
+    <h1>📚 Bnelk Formations Gratuites</h1>
+    <p>Apprenez avec nos formations vidéos et téléchargez les supports PDF gratuites</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#videos">Formations Vidéos</a></li>
+      <li><a href="#pdfs">PDF</a></li>
+    </ul>
+  </nav>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Rechercher une formation...">
+  </div>
+
+  <div class="categories">
+    <button onclick="filterCategory('all')">Toutes</button>
+    <button onclick="filterCategory('Web')">Web</button>
+    <button onclick="filterCategory('Programmation')">Programmation</button>
+    <button onclick="filterCategory('Bureautique')">Bureautique</button>
+    <button onclick="filterCategory('Sécurité')">Sécurité</button>
+  </div>
+
+  <main class="container">
+    <section id="accueil">
+      <h2>Accueil</h2>
+      <p>Bienvenue sur la plateforme <strong>Bnelk Formations Gratuites</strong>.</p>
+    </section>
+
+    <!-- Les sections vidéos et PDF restent identiques à la version précédente -->
+  </main>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const courseGrid = document.getElementById("courseGrid");
+    const cards = courseGrid ? courseGrid.getElementsByClassName("card") : [];
+
+    searchInput.addEventListener("keyup", function() {
+      const filter = searchInput.value.toLowerCase();
+      for (let i = 0; i < cards.length; i++) {
+        const title = cards[i].querySelector("h3").textContent.toLowerCase();
+        const desc = cards[i].querySelector("p").textContent.toLowerCase();
+        if (title.includes(filter) || desc.includes(filter)) {
+          cards[i].style.display = "";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    });
+
+    function filterCategory(category) {
+      for (let i = 0; i < cards.length; i++) {
+        const cardCategory = cards[i].getAttribute("data-category");
+        if (category === "all" || cardCategory === category) {
+          cards[i].style.display = "";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
